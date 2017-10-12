@@ -1,0 +1,71 @@
+#Demo workflow
+
+workflow:
+  name:  webpage-word-count
+  version: "0.0.1"
+
+  execution:
+    constraint: same_host  # other values: 'shared_fs', 'same_worker'
+    memory: 2g
+    cpu: 1
+
+  input:
+    webpage_url:
+      type: string
+    words:
+      type: array
+      items:
+        type: string
+
+  output:
+    counts: count@counter
+
+
+  tasks:
+    download_webpage:
+      tool: download_webpage
+      input:
+        url: webpage_url
+      depends_on: null
+
+    parallel_word_count:
+      scatter:
+        input:
+          word:
+            with_items: words  # this can be from output of a previous task, eg, files@previous_task
+            task_suffix:   # Optional
+      tasks:
+        count:
+          tool: word_counter  # optional, if omitted tool name will be the same as task name
+          input:
+            word: word
+            file_name: file@download_webpage
+          depends_on: completed@download_webpage
+
+
+# A workflow is made up with one or more tools
+# Each tool can have its own docker imagine if desirable
+tools:
+  download_webpage:
+    command: download.py
+    python_lib: requests
+    input:
+      url:
+        type: string
+    output:
+      file:
+        type: string
+        is_file: true
+
+  word_counter:
+    command: word_counter.py
+    python_lib: bs4
+    input:
+      file:
+        type: string
+        is_file: true
+      word:
+        type: string
+    output:
+      count:
+        type: integer
