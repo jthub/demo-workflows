@@ -2,7 +2,7 @@
 
 workflow:
   name:  webpage-word-count
-  version: "0.0.1"
+  version: "0.0.2"
 
   execution:
     constraint: same_host  # other values: 'shared_fs', 'same_worker'
@@ -40,7 +40,8 @@ workflow:
           input:
             word: word
             file_name: file@download_webpage
-          depends_on: completed@download_webpage
+          depends_on:
+          - completed@download_webpage
 
 
 # A workflow is made up with one or more tools
