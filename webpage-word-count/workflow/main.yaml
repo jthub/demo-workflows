@@ -39,7 +39,7 @@ workflow:
           tool: word_counter  # optional, if omitted tool name will be the same as task name
           input:
             word: word
-            file_name: file@download_webpage
+            file: file@download_webpage
           depends_on:
           - completed@download_webpage
 

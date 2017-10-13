@@ -9,7 +9,7 @@ from utils import get_task_dict, save_output_json
 task_dict = get_task_dict(sys.argv[1])
 
 # download from the url
-url = task_dict.get('url')
+url = task_dict.get('input').get('url')
 response = requests.get(url)
 
 # write to a file
@@ -18,7 +18,7 @@ with open(file_name, 'w') as f:
     f.write(response.content)
 
 output_json = {
-    'file': os.path.join(cwd, file_name)
+    'file': os.path.join(os.getcwd(), file_name)
 }
 
 save_output_json(output_json)
