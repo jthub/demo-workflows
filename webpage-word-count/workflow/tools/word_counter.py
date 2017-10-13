@@ -10,14 +10,15 @@ task_dict = get_task_dict(sys.argv[1])
 word = task_dict.get('input').get('word')
 file_ = task_dict.get('input').get('file')
 
-with open(file_, 'r') as f
+with open(file_, 'r') as f:
     webpage_html = f.read()
 
 soup = bs4.BeautifulSoup(webpage_html, 'html.parser')
 results = soup.body.find_all(string=re.compile('.*{0}.*'.format(word)), recursive=True)
 
 output_json = {
-    'count': len(results)
+    'count': len(results),
+    'word': word
 }
 
 save_output_json(output_json)
