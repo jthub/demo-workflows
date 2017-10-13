@@ -2,7 +2,7 @@
 
 workflow:
   name:  webpage-word-count
-  version: "0.0.2"
+  version: "0.0.3"
 
   execution:
     constraint: same_host  # other values: 'shared_fs', 'same_worker'
