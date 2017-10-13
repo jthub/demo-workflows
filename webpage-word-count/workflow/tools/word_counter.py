@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 
+import sys
 import re
 import bs4
 from utils import get_task_dict, save_output_json
