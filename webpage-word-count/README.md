@@ -1,4 +1,4 @@
-# JTracker Demo Workflow: webpage_word_count
+# JTracker Demo Workflow: webpage-word-count
 
 ## Input file
 
