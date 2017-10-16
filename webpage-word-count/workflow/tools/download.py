@@ -2,8 +2,8 @@
 
 import os
 import sys
-import requests
 import time
+import urllib2
 from random import randint
 from utils import get_task_dict, save_output_json
 
@@ -14,12 +14,12 @@ task_dict = get_task_dict(sys.argv[1])
 
 # download from the url
 url = task_dict.get('input').get('url')
-response = requests.get(url)
+response = urllib2.urlopen(url)
 
 # write to a file
 file_name = '%s.html' % int(time.time())
 with open(file_name, 'w') as f:
-    f.write(response.content)
+    f.write(response.read())
 
 output_json = {
     'file': os.path.join(os.getcwd(), file_name)
