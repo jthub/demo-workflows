@@ -2,7 +2,7 @@
 
 workflow:
   name:  dream-challenge-wf-runner
-  version: "0.0.1"
+  version: "0.0.2"
 
   execution:
     constraint: same_host  # other values: 'shared_fs', 'same_worker'
