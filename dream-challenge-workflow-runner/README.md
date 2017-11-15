@@ -3,15 +3,6 @@
 Note: this is a quick draft with major components in place to run GA4GH Dream Challenge Workflows.
 
 
-## Input file
+## Example Job Files
 
-The input includes one parameters: `workflow_name`.
-
-Here is an example Job File:
-
-```
-{
-    "workflow_name": "pcawg-sanger-variant-caller"
-}
-```
-
+Example Job files can be found in `example_jobs` directory.
