@@ -43,14 +43,14 @@ workflow:
         data_syn_id: data_syn_id
 
     run_workflow:
-      tool: workflow_running
+      tool: run_workflow
       input:
         workdir: workdir@provision_workflow_files
         wf_file: wf_file
         job_file: job_file
 
     validate_result:
-      tool: validator
+      tool: validate_result
       input:
         workdir: workdir@run_workflow
         checker_wf_file: checker_wf_file
