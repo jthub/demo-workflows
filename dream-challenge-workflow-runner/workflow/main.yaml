@@ -12,31 +12,58 @@ workflow:
   input:
     workflow_name:
       type: string
+    workflow_type:
+      type: string
+    data_syn_id:
+      type: string
+    wf_file:
+      type: string
+    job_file:
+      type: string
+    checker_wf_file:
+      type: string
+    checker_job_file:
+      type: string
+    submit_job_file:
+      type: string
+    team_name:
+      type: string
+    syn_parent_id:
+      type: string
+    eval_id:
+      type: string
 
   output:
-
 
   tasks:
     provision_workflow_files:
       tool: synapse_get
       input:
         workflow_name: workflow_name
-      depends_on: null
+        data_syn_id: data_syn_id
 
     run_workflow:
       tool: workflow_running
       input:
         workdir: workdir@provision_workflow_files
+        wf_file: wf_file
+        job_file: job_file
 
     validate_result:
       tool: validator
       input:
         workdir: workdir@run_workflow
+        checker_wf_file: checker_wf_file
+        checker_job_file: checker_job_file
 
     upload_result:
       tool: synapse_submit
       input:
         workdir: workdir@validate_result
+        submit_job_file: submit_job_file
+        eval_id: eval_id
+        team_name: team_name
+        syn_parent_id: syn_parent_id
 
 
 # A workflow is made up with one or more tools
@@ -47,24 +74,12 @@ tools:
     input:
       workflow_name:
         type: string
+      data_syn_id:
+        type: string
     output:
       workdir:
         type: string
         is_dir: true
-      workflow_name:
-        type: string
-      cwl_file_name:
-        type: string
-      job_file_name:
-        type: string
-      checker_cwl_file_name:
-        type: string
-      checker_job_file_name:
-        type: string
-      submit_job_file_name:
-        type: string
-      eval_id:
-        type: string
 
   run_workflow:
     command: run_workflow.py
@@ -72,34 +87,14 @@ tools:
       workdir:
         type: string
         is_dir: true
-      workflow_name:
-        type: string
-      cwl_file_name:
+      wf_file_name:
         type: string
       job_file_name:
-        type: string
-      checker_cwl_file_name:
-        type: string
-      checker_job_file_name:
-        type: string
-      submit_job_file_name:
-        type: string
-      eval_id:
         type: string
     output:
       workdir:
         type: string
         is_dir: true
-      workflow_name:
-        type: string
-      checker_cwl_file_name:
-        type: string
-      checker_job_file_name:
-        type: string
-      submit_job_file_name:
-        type: string
-      eval_id:
-        type: string
 
   validate_result:
     command: validate_result.py
@@ -107,32 +102,30 @@ tools:
       workdir:
         type: string
         is_dir: true
-      workflow_name:
-        type: string
-      checker_cwl_file_name:
+      checker_wf_file_name:
         type: string
       checker_job_file_name:
         type: string
-      submit_job_file_name:
-        type: string
-      eval_id:
-        type: string
     output:
-      workflow_name:
-        type: string
       is_success:
         type: boolean
-      submit_job_file_name:
+      workdir:
         type: string
-      eval_id:
-        type: string
+        is_dir: true
 
   synapse_submit:
     command: synapse_submit.py
     input:
+      workdir:
+        type: string
+        is_dir: true
       is_success:
         type: boolean
       submit_job_file_name:
+        type: string
+      team_name:
+        type: string
+      syn_parent_id:
         type: string
       eval_id:
         type: string
