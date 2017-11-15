@@ -1,0 +1,138 @@
+#Demo workflow
+
+workflow:
+  name:  dream-challenge-workflow-runner
+  version: "0.0.1"
+
+  execution:
+    constraint: same_host  # other values: 'shared_fs', 'same_worker'
+    memory: 32g
+    cpu: 8
+
+  input:
+    workflow_name:
+      type: string
+
+  output:
+
+
+  tasks:
+    provision_workflow_files:
+      tool: synapse_get
+      input:
+        workflow_name: workflow_name
+      depends_on: null
+
+    run_workflow:
+      tool: workflow_running
+      input:
+        workdir: workdir@provision_workflow_files
+
+    validate_result:
+      tool: validator
+      input:
+        workdir: workdir@run_workflow
+
+    upload_result:
+      tool: synapse_submit
+      input:
+        workdir: workdir@validate_result
+
+
+# A workflow is made up with one or more tools
+# Each tool can have its own docker imagine if desirable
+tools:
+  synapse_get:
+    command: synapse_get.py
+    input:
+      workflow_name:
+        type: string
+    output:
+      workdir:
+        type: string
+        is_dir: true
+      workflow_name:
+        type: string
+      cwl_file_name:
+        type: string
+      job_file_name:
+        type: string
+      checker_cwl_file_name:
+        type: string
+      checker_job_file_name:
+        type: string
+      submit_job_file_name:
+        type: string
+      eval_id:
+        type: string
+
+  run_workflow:
+    command: run_workflow.py
+    input:
+      workdir:
+        type: string
+        is_dir: true
+      workflow_name:
+        type: string
+      cwl_file_name:
+        type: string
+      job_file_name:
+        type: string
+      checker_cwl_file_name:
+        type: string
+      checker_job_file_name:
+        type: string
+      submit_job_file_name:
+        type: string
+      eval_id:
+        type: string
+    output:
+      workdir:
+        type: string
+        is_dir: true
+      workflow_name:
+        type: string
+      checker_cwl_file_name:
+        type: string
+      checker_job_file_name:
+        type: string
+      submit_job_file_name:
+        type: string
+      eval_id:
+        type: string
+
+  validate_result:
+    command: validate_result.py
+    input:
+      workdir:
+        type: string
+        is_dir: true
+      workflow_name:
+        type: string
+      checker_cwl_file_name:
+        type: string
+      checker_job_file_name:
+        type: string
+      submit_job_file_name:
+        type: string
+      eval_id:
+        type: string
+    output:
+      workflow_name:
+        type: string
+      is_success:
+        type: boolean
+      submit_job_file_name:
+        type: string
+      eval_id:
+        type: string
+
+  synapse_submit:
+    command: synapse_submit.py
+    input:
+      is_success:
+        type: boolean
+      submit_job_file_name:
+        type: string
+      eval_id:
+        type: string
