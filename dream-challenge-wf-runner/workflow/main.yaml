@@ -1,7 +1,7 @@
 #Demo workflow
 
 workflow:
-  name:  dream-challenge-workflow-runner
+  name:  dream-challenge-wf-runner
   version: "0.0.1"
 
   execution:
