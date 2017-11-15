@@ -16,15 +16,15 @@ workflow:
       type: string
     data_syn_id:
       type: string
-    wf_file:
+    wf_file_name:
       type: string
-    job_file:
+    job_file_name:
       type: string
-    checker_wf_file:
+    checker_wf_file_name:
       type: string
-    checker_job_file:
+    checker_job_file_name:
       type: string
-    submit_job_file:
+    submit_job_file_name:
       type: string
     team_name:
       type: string
@@ -46,21 +46,21 @@ workflow:
       tool: run_workflow
       input:
         workdir: workdir@provision_workflow_files
-        wf_file: wf_file
-        job_file: job_file
+        wf_file_name: wf_file_name
+        job_file_name: job_file_name
 
     validate_result:
       tool: validate_result
       input:
         workdir: workdir@run_workflow
-        checker_wf_file: checker_wf_file
-        checker_job_file: checker_job_file
+        checker_wf_file_name: checker_wf_file_name
+        checker_job_file_name: checker_job_file_name
 
     upload_result:
       tool: synapse_submit
       input:
         workdir: workdir@validate_result
-        submit_job_file: submit_job_file
+        submit_job_file_name: submit_job_file_name
         eval_id: eval_id
         team_name: team_name
         syn_parent_id: syn_parent_id
