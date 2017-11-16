@@ -2,7 +2,7 @@
 
 workflow:
   name:  dream-challenge-wf-runner
-  version: "0.0.3"
+  version: "0.0.4"
 
   execution:
     constraint: same_host  # other values: 'shared_fs', 'same_worker'
@@ -53,12 +53,14 @@ workflow:
       tool: validate_result
       input:
         workdir: workdir@run_workflow
+        workflow_name: workflow_name
         checker_wf_file_name: checker_wf_file_name
         checker_job_file_name: checker_job_file_name
 
     upload_result:
       tool: synapse_submit
       input:
+        workflow_name: workflow_name
         workdir: workdir@validate_result
         submit_job_file_name: submit_job_file_name
         eval_id: eval_id
@@ -99,6 +101,8 @@ tools:
   validate_result:
     command: validate_result.py
     input:
+      workflow_name:
+        type: string
       workdir:
         type: string
         is_dir: true
@@ -116,6 +120,8 @@ tools:
   synapse_submit:
     command: synapse_submit.py
     input:
+      workflow_name:
+        type: string
       workdir:
         type: string
         is_dir: true

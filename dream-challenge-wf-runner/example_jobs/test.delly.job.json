@@ -7,7 +7,7 @@
     "checker_wf_file_name": "pcawg-delly-sv-caller_checker.cwl",
     "checker_job_file_name": "pcawg-delly-sv-caller_checker.cwl.json",
     "submit_job_file_name": "pcawg-delly-sv-caller_submit.cwl.json",
-    "team_name": "JTracker",
-    "syn_parent_id": "",
+    "team_name": "PCAWG-Tech",
+    "syn_parent_id": "syn11449436",
     "eval_id": "9606704"
 }
