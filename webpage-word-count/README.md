@@ -10,12 +10,7 @@ Here is an example Job File:
 {
     "webpage_url": "https://dzone.com/cloud-computing-tutorials-tools-news",
     "words": [
-        "Cloud",
-        "Java",
-        "AngularJS",
-        "div",
-        "class"
+        "Cloud", "Docker", "Kubernetes", "OpenStack"
     ]
 }
 ```
-
