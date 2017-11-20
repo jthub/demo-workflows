@@ -5,7 +5,7 @@ workflow:
   version: "0.0.8"
 
   execution:
-    constraint: same_host  # other values: 'shared_fs', 'same_worker'
+    constraint: same_executor  # other values: 'shared_fs', 'same_host'
     memory: 2g
     cpu: 1
 
@@ -41,7 +41,7 @@ workflow:
             word: word
             file: file@download_webpage
           depends_on:
-          - completed@download_webpage
+          - completed@download_webpage  # optional, let user define dependency explicitly, not really needed in this case
 
 
 # A workflow is made up with one or more tools
@@ -49,7 +49,6 @@ workflow:
 tools:
   download_webpage:
     command: download.py
-    python_lib: requests   # install py lib is not supported yet, may not need it if go with docker
     input:
       url:
         type: string
