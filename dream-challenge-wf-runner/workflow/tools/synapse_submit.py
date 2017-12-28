@@ -28,33 +28,30 @@ subprocess.check_output(['synapse', '-c', synapse_conf_file, 'get', 'syn9732885'
 
 # TODO: we need to update the content of submit_job_file to include Team info, eval_id, parent_id etc
 result_files = []
-if workflow_name == 'pcawg-sanger-variant-caller' or \
-    workflow_name == 'pcawg-delly-sv-caller' or \
-    workflow_name == 'md5sum' or \
-    workflow_name == 'hello_world':
-    result_files = []
-    for f in os.listdir(os.getcwd()):
-        if (f.startswith('HCC1143.csc_0-0-0.') and f.endswith('tar.gz')) or \
-                f.startswith('run_id.embl-delly_1-3-0') or \
-                f == 'md5sum.txt' or f == 'helloworld.txt':
-            result_files.append({
-                "path": f,
-                "class": "File"
-            })
+for f in os.listdir(os.getcwd()):
+    if (f.startswith('HCC1143.csc_0-0-0.') and f.endswith('tar.gz')) or \
+            f.startswith('run_id.embl-delly_1-3-0') or \
+            f.startswith('SRR1198790.') or \
+            f == '123e4567-e89b-12d3-a456-426655440000.db' or \
+            f == 'md5sum.txt' or f == 'helloworld.txt':
+        result_files.append({
+            "path": f,
+            "class": "File"
+        })
 
-    submit_job = {
-      "config_file": {
-        "class": "File",
-        "path": synapse_conf_file
-      },
-      "team_name": team_name,
-      "eval_id": eval_id,
-      "file": result_files,
-      "parent_id": syn_parent_id
-    }
+submit_job = {
+  "config_file": {
+    "class": "File",
+    "path": synapse_conf_file
+  },
+  "team_name": team_name,
+  "eval_id": eval_id,
+  "file": result_files,
+  "parent_id": syn_parent_id
+}
 
-    with open(os.path.join(os.getcwd(), submit_job_file_name), 'w') as f:
-        f.write(json.dumps(submit_job))
+with open(os.path.join(os.getcwd(), submit_job_file_name), 'w') as f:
+    f.write(json.dumps(submit_job))
 
 try:
     subprocess.check_output(['cwltool', '--non-strict',

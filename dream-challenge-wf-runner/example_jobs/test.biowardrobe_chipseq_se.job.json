@@ -1,0 +1,13 @@
+{
+    "workflow_name": "biowardrobe_chipseq_se",
+    "workflow_type": "CWL",
+    "data_syn_id": "syn9772359",
+    "wf_file_name": "biowardrobe_chipseq_se.cwl",
+    "job_file_name": "biowardrobe_chipseq_se.json",
+    "checker_wf_file_name": "biowardrobe_chipseq_se_checker.cwl",
+    "checker_job_file_name": "biowardrobe_chipseq_se_checker.json",
+    "submit_job_file_name": "submit.json",
+    "team_name": "PCAWG-Tech",
+    "syn_parent_id": "syn11638849",
+    "eval_id": "9604287"
+}
