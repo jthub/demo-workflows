@@ -33,7 +33,8 @@ if workflow_name == 'pcawg-sanger-variant-caller' or \
     result_files = []
     for f in os.listdir(os.getcwd()):
         if (f.startswith('HCC1143.csc_0-0-0.') and f.endswith('tar.gz')) or \
-                f.startswith('run_id.embl-delly_1-3-0'):
+                f.startswith('run_id.embl-delly_1-3-0') or \
+                f == 'md5sum.txt' or f == 'helloworld.txt':
             result_files.append({
                 "path": f,
                 "class": "File"

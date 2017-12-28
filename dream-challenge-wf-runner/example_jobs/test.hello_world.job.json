@@ -1,0 +1,13 @@
+{
+    "workflow_name": "hello_world",
+    "workflow_type": "CWL",
+    "data_syn_id": "syn9630940",
+    "wf_file_name": "hello_world.cwl",
+    "job_file_name": "hello_world.cwl.json",
+    "checker_wf_file_name": "hello_world_checker.cwl",
+    "checker_job_file_name": "hello_world_checker.cwl.json",
+    "submit_job_file_name": "md5sum_submit.submit.json",
+    "team_name": "PCAWG-Tech",
+    "syn_parent_id": "syn11638604",
+    "eval_id": "9603665"
+}

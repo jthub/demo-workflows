@@ -1,0 +1,13 @@
+{
+    "workflow_name": "md5sum",
+    "workflow_type": "CWL",
+    "data_syn_id": "syn10167920",
+    "wf_file_name": "md5sum.cwl",
+    "job_file_name": "md5sum.cwl.json",
+    "checker_wf_file_name": "md5sum_checker.cwl",
+    "checker_job_file_name": "md5sum_checker.cwl.json",
+    "submit_job_file_name": "md5sum_submit.submit.json",
+    "team_name": "PCAWG-Tech",
+    "syn_parent_id": "syn11638600",
+    "eval_id": "9603664"
+}
