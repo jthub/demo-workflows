@@ -29,7 +29,9 @@ subprocess.check_output(['synapse', '-c', synapse_conf_file, 'get', 'syn9732885'
 # TODO: we need to update the content of submit_job_file to include Team info, eval_id, parent_id etc
 result_files = []
 if workflow_name == 'pcawg-sanger-variant-caller' or \
-                workflow_name == 'pcawg-delly-sv-caller':
+    workflow_name == 'pcawg-delly-sv-caller' or \
+    workflow_name == 'md5sum' or \
+    workflow_name == 'hello_world':
     result_files = []
     for f in os.listdir(os.getcwd()):
         if (f.startswith('HCC1143.csc_0-0-0.') and f.endswith('tar.gz')) or \
