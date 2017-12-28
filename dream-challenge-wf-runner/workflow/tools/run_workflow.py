@@ -2,6 +2,7 @@
 
 import os
 import sys
+import shutil
 import json
 import subprocess
 from utils import get_task_dict, save_output_json
@@ -13,11 +14,11 @@ workdir = task_dict.get('input').get('workdir')
 wf_file_name = task_dict.get('input').get('wf_file_name')
 job_file_name = task_dict.get('input').get('job_file_name')
 
-# link everything except for 'output.json' to the current working dir
+# copy everything except for 'output.json' to the current working dir
 for f in os.listdir(workdir):
     if f == 'output.json':
         continue
-    os.symlink(os.path.join(workdir, f), f)
+    shutil.copytree(os.path.join(workdir, f), .)  # this is bad because it wastes a lot of space, but let's go with this for now
 
 try:
     subprocess.check_output(['cwltool', '--non-strict', wf_file_name, job_file_name])

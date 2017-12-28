@@ -2,6 +2,7 @@
 
 import os
 import sys
+import shutil
 import json
 import subprocess
 from utils import get_task_dict, save_output_json
@@ -17,11 +18,11 @@ eval_id = task_dict.get('input').get('eval_id')
 syn_parent_id = task_dict.get('input').get('syn_parent_id')
 team_name = task_dict.get('input').get('team_name')
 
-# link everything except for 'output.json' to the current working dir
+# copy everything except for 'output.json' to the current working dir
 for f in os.listdir(workdir):
     if f == 'output.json':
         continue
-    os.symlink(os.path.join(workdir, f), f)
+    shutil.copytree(os.path.join(workdir, f), .)  # this is bad because it wastes a lot of space, but let's go with this for now
 
 # get synapse-submit CWL file: dockstore-tool-synapse-submit.cwl (with a fixed id syn9732885)
 subprocess.check_output(['synapse', '-c', synapse_conf_file, 'get', 'syn9732885'])

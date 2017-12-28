@@ -2,6 +2,7 @@
 
 import os
 import sys
+import shutil
 import json
 import subprocess
 from utils import get_task_dict, save_output_json
@@ -14,11 +15,11 @@ workflow_name = task_dict.get('input').get('workflow_name')
 checker_wf_file_name = task_dict.get('input').get('checker_wf_file_name')
 checker_job_file_name = task_dict.get('input').get('checker_job_file_name')
 
-# link everything except for 'output.json' to the current working dir
+# copy everything except for 'output.json' to the current working dir
 for f in os.listdir(workdir):
     if f == 'output.json':
         continue
-    os.symlink(os.path.join(workdir, f), f)
+    shutil.copytree(os.path.join(workdir, f), .)  # this is bad because it wastes a lot of space, but let's go with this for now
 
 # TODO: we will need to modified the job json content in some cases where output
 #       of the workflow file names are not fixed
