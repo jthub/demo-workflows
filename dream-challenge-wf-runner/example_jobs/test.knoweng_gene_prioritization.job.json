@@ -1,0 +1,13 @@
+{
+    "workflow_name": "knoweng_gene_prioritization",
+    "workflow_type": "CWL",
+    "data_syn_id": "syn10235824",
+    "wf_file_name": "gp_workflow.cwl",
+    "job_file_name": "gp_workflow_job.yml",
+    "checker_wf_file_name": "check_results.cwl",
+    "checker_job_file_name": "check_results_job.yml",
+    "submit_job_file_name": "submit.json",
+    "team_name": "PCAWG-Tech",
+    "syn_parent_id": "syn11639277",
+    "eval_id": "9606345"
+}

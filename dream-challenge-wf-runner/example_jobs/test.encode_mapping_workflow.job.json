@@ -1,0 +1,13 @@
+{
+    "workflow_name": "encode_mapping_workflow",
+    "workflow_type": "CWL",
+    "data_syn_id": "syn10163025",
+    "wf_file_name": "encode_mapping_workflow.cwl",
+    "job_file_name": "encode_mapping_workflow.cwl.json",
+    "checker_wf_file_name": "validator.cwl",
+    "checker_job_file_name": "validator.json",
+    "submit_job_file_name": "submit.json",
+    "team_name": "PCAWG-Tech",
+    "syn_parent_id": "syn11639257",
+    "eval_id": "9605639"
+}

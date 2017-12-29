@@ -44,6 +44,45 @@ for f in os.listdir(os.getcwd()):
             "class": "File"
         })
 
+if workflow_name == 'encode_mapping_workflow':
+    result_files = [
+        {
+          "class": "File",
+          "path": "7-26-2017T2H43M10S/mapping.json"
+        },
+        {
+          "class": "File",
+          "path": "7-26-2017T2H43M10S/post_mapping.json"
+        },
+        {
+          "class": "File",
+          "path": "7-26-2017T2H43M10S/filter_qc.json"
+        },
+        {
+          "class": "File",
+          "path": "7-26-2017T2H43M10S/xcor.json"
+        }
+    ]
+elif workflow_name == 'knoweng_gene_prioritization':
+    result_files = [
+        {
+          "class": "File",
+          "path": "ranked_genes_download.tsv"
+        },
+        {
+          "class": "File",
+          "path": "top_genes_download.tsv"
+        },
+        {
+          "class": "File",
+          "path": "combo_results.txt"
+        },
+        {
+          "class": "File",
+          "path": "9606.STRING_experimental.edge"
+        }
+    ]
+
 submit_job = {
   "config_file": {
     "class": "File",
