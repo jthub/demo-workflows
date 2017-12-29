@@ -1,0 +1,13 @@
+{
+    "workflow_name": "bcbio_NA12878-chr20",
+    "workflow_type": "CWL",
+    "data_syn_id": "syn9725771",
+    "wf_file_name": "NA12878-platinum-chr20-workflow/main-NA12878-platinum-chr20.cwl",
+    "job_file_name": "NA12878-platinum-chr20-workflow/main-NA12878-platinum-chr20-samples.json",
+    "checker_wf_file_name": "bcbio_NA12878-chr20_checker.cwl",
+    "checker_job_file_name": "bcbio_NA12878-chr20_checker.json",
+    "submit_job_file_name": "submit.json",
+    "team_name": "PCAWG-Tech",
+    "syn_parent_id": "syn11639122",
+    "eval_id": "9605240"
+}

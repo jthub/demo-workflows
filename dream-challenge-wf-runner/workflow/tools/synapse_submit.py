@@ -37,6 +37,7 @@ for f in os.listdir(os.getcwd()):
             f.startswith('run_id.embl-delly_1-3-0') or \
             f.startswith('SRR1198790.') or \
             f == '123e4567-e89b-12d3-a456-426655440000.db' or \
+            f == 'grading-summary-NA12878-chr20.csv' or \
             f == 'md5sum.txt' or f == 'helloworld.txt':
         result_files.append({
             "path": f,
