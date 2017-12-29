@@ -36,7 +36,7 @@ if workflow_name == 'pcawg-sanger-variant-caller' or \
                 "path": f,
                 "class": "File"
             })
-        elif re.match(r'[0-9]+-[0-9]+-20[0-9]{2}T[0-9]+H[0-9]+M[0-9]+S', f)
+        elif re.match(r'[0-9]+-[0-9]+-20[0-9]{2}T[0-9]+H[0-9]+M[0-9]+S', f):
             result_files.append({
                 "path": f,
                 "class": "Directory"
