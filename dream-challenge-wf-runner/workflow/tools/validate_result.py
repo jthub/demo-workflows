@@ -30,6 +30,7 @@ for f in os.listdir(workdir):
 if workflow_name == 'pcawg-sanger-variant-caller' or \
    workflow_name == 'encode_mapping_workflow':
     result_files = []
+    output_folder = ''
     for f in os.listdir(os.getcwd()):
         if f.startswith('HCC1143.csc_0-0-0.') and f.endswith('tar.gz'):
             result_files.append({
@@ -37,17 +38,24 @@ if workflow_name == 'pcawg-sanger-variant-caller' or \
                 "class": "File"
             })
         elif re.match(r'[0-9]+-[0-9]+-20[0-9]{2}T[0-9]+H[0-9]+M[0-9]+S', f):
-            result_files.append({
-                "path": f,
-                "class": "Directory"
-            })
+            output_folder = f
 
-    with open(os.path.join(os.getcwd(), checker_job_file_name), 'r') as f:
-        checker_job = json.load(f)
-
-    checker_job['result_files'] = result_files
-    with open(os.path.join(os.getcwd(), checker_job_file_name), 'w') as f:
-        f.write(json.dumps(checker_job))
+    if workflow_name == 'pcawg-sanger-variant-caller':
+        with open(os.path.join(os.getcwd(), checker_job_file_name), 'r') as f:
+            checker_job = json.load(f)
+    
+        checker_job['result_files'] = result_files
+        with open(os.path.join(os.getcwd(), checker_job_file_name), 'w') as f:
+            f.write(json.dumps(checker_job))
+    elif workflow_name == 'encode_mapping_workflow':
+        checker_job = {
+          "output_folder": {
+            "path": output_folder,
+            "class": "Directory"
+          }
+        }
+        with open(os.path.join(os.getcwd(), checker_job_file_name), 'w') as f:
+            f.write(json.dumps(checker_job))
 
 try:
     subprocess.check_output(['cwltool', '--non-strict', checker_wf_file_name, checker_job_file_name])
