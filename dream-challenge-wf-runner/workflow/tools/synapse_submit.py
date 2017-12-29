@@ -22,7 +22,10 @@ team_name = task_dict.get('input').get('team_name')
 for f in os.listdir(workdir):
     if f == 'output.json':
         continue
-    shutil.copytree(os.path.join(workdir, f), f)  # this is bad because it wastes a lot of space, but let's go with this for now
+    if os.isdir(os.path.join(workdir, f)):
+        shutil.copytree(os.path.join(workdir, f), f)  # this is bad because it wastes a lot of space, but let's go with this for now
+    else:
+        shutil.copy(os.path.join(workdir, f), f)
 
 # get synapse-submit CWL file: dockstore-tool-synapse-submit.cwl (with a fixed id syn9732885)
 subprocess.check_output(['synapse', '-c', synapse_conf_file, 'get', 'syn9732885'])
