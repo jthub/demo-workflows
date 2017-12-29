@@ -22,7 +22,7 @@ team_name = task_dict.get('input').get('team_name')
 for f in os.listdir(workdir):
     if f == 'output.json':
         continue
-    if os.isdir(os.path.join(workdir, f)):
+    if os.path.isdir(os.path.join(workdir, f)):
         shutil.copytree(os.path.join(workdir, f), f)  # this is bad because it wastes a lot of space, but let's go with this for now
     else:
         shutil.copy(os.path.join(workdir, f), f)
