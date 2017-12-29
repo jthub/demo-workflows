@@ -2,6 +2,7 @@
 
 import os
 import sys
+import re
 import shutil
 import json
 import subprocess
@@ -26,13 +27,19 @@ for f in os.listdir(workdir):
 
 # TODO: we will need to modified the job json content in some cases where output
 #       of the workflow file names are not fixed
-if workflow_name == 'pcawg-sanger-variant-caller':
+if workflow_name == 'pcawg-sanger-variant-caller' or \
+   workflow_name == 'encode_mapping_workflow':
     result_files = []
     for f in os.listdir(os.getcwd()):
         if f.startswith('HCC1143.csc_0-0-0.') and f.endswith('tar.gz'):
             result_files.append({
                 "path": f,
                 "class": "File"
+            })
+        elif re.match(r'[0-9]+-[0-9]+-20[0-9]{2}T[0-9]+H[0-9]+M[0-9]+S', f)
+            result_files.append({
+                "path": f,
+                "class": "Directory"
             })
 
     with open(os.path.join(os.getcwd(), checker_job_file_name), 'r') as f:
@@ -50,7 +57,7 @@ except:
 
     output_json = { 'is_success': False }
     save_output_json(output_json)
-    sys.exit(0)  # deliberately not to fail, pass to the next step to handle it
+    sys.exit(1)
 
 output_json = {
     'workdir': os.getcwd(),

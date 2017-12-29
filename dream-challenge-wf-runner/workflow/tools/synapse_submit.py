@@ -2,6 +2,7 @@
 
 import os
 import sys
+import re
 import shutil
 import json
 import subprocess
@@ -32,6 +33,7 @@ subprocess.check_output(['synapse', '-c', synapse_conf_file, 'get', 'syn9732885'
 
 # TODO: we need to update the content of submit_job_file to include Team info, eval_id, parent_id etc
 result_files = []
+dirname = ''
 for f in os.listdir(os.getcwd()):
     if (f.startswith('HCC1143.csc_0-0-0.') and f.endswith('tar.gz')) or \
             f.startswith('run_id.embl-delly_1-3-0') or \
@@ -43,24 +45,27 @@ for f in os.listdir(os.getcwd()):
             "path": f,
             "class": "File"
         })
+    if workflow_name == 'encode_mapping_workflow' and \
+        re.match(r'[0-9]+-[0-9]+-20[0-9]{2}T[0-9]+H[0-9]+M[0-9]+S', f):
+        dirname = f  
 
 if workflow_name == 'encode_mapping_workflow':
     result_files = [
         {
           "class": "File",
-          "path": "7-26-2017T2H43M10S/mapping.json"
+          "path": "%s/mapping.json" % dirname
         },
         {
           "class": "File",
-          "path": "7-26-2017T2H43M10S/post_mapping.json"
+          "path": "%s/post_mapping.json" % dirname
         },
         {
           "class": "File",
-          "path": "7-26-2017T2H43M10S/filter_qc.json"
+          "path": "%s/filter_qc.json" % dirname
         },
         {
           "class": "File",
-          "path": "7-26-2017T2H43M10S/xcor.json"
+          "path": "%s/xcor.json" % dirname
         }
     ]
 elif workflow_name == 'knoweng_gene_prioritization':
