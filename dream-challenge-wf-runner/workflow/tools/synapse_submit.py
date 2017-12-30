@@ -88,6 +88,33 @@ elif workflow_name == 'knoweng_gene_prioritization':
           "path": "9606.STRING_experimental.edge"
         }
     ]
+elif workflow_name == 'bcbio-giab-joint':
+    result_files = [
+        {
+            "class": "File",
+            "path": "grading-summary-gj1.csv"
+        },
+        {
+            "class": "File",
+            "path": "multiqc_report.html"
+        },
+        {
+            "class": "File",
+            "path": "NA12878-gatk-haplotype.vcf.gz"
+        },
+        {
+            "class": "File",
+            "path": "NA24385-gatk-haplotype.vcf.gz"
+        },
+        {
+            "class": "File",
+            "path": "NA24631-gatk-haplotype.vcf.gz"
+        },
+        {
+            "class": "File",
+            "path": "gj1-gatk-haplotype.vcf.gz"
+        }
+    ]
 
 submit_job = {
   "config_file": {
