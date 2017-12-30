@@ -1,0 +1,13 @@
+{
+    "workflow_name": "bcbio-giab-joint",
+    "workflow_type": "CWL",
+    "data_syn_id": "syn10466755",
+    "wf_file_name": "giab-joint-workflow/main-giab-joint.cwl",
+    "job_file_name": "giab-joint-workflow/main-giab-joint-samples.json",
+    "checker_wf_file_name": "bcbio-giab-joint_checker.cwl",
+    "checker_job_file_name": "bcbio-giab-joint_checker.json",
+    "submit_job_file_name": "submit.json",
+    "team_name": "PCAWG-Tech",
+    "syn_parent_id": "syn11639744",
+    "eval_id": "9606717"
+}
