@@ -1,13 +1,8 @@
-#Demo workflow
+# Dream challenge workflow runner
 
 workflow:
   name:  dream-challenge-wf-runner
   version: "0.0.8"
-
-  execution:
-    constraint: same_host  # other values: 'shared_fs', 'same_worker'
-    memory: 32g
-    cpu: 8
 
   input:
     workflow_name:
@@ -32,8 +27,6 @@ workflow:
       type: string
     eval_id:
       type: string
-
-  output:
 
   tasks:
     provision_workflow_files:

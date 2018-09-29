@@ -2,7 +2,7 @@
 
 workflow:
   name:  webpage-word-count
-  version: "0.0.8"
+  version: "0.0.9"
 
   execution:
     constraint: same_executor  # other values: 'shared_fs', 'same_host'
@@ -48,7 +48,8 @@ workflow:
 # Each tool can have its own docker imagine if desirable
 tools:
   download_webpage:
-    command: download.py
+    command: |
+      curl ${url} > abc.html && echo "{\"file\": \"$(pwd)/abc.html\"}" > output.json
     input:
       url:
         type: string
