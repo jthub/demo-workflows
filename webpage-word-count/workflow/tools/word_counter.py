@@ -7,7 +7,7 @@ from random import randint
 from utils import get_task_dict, save_output_json
 
 # sleep a random interval, purely for demo purpose
-time.sleep(randint(20, 60))
+time.sleep(randint(5, 20))
 
 task_dict = get_task_dict(sys.argv[1])
 
