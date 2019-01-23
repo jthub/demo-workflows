@@ -8,7 +8,7 @@ Here is an example Job File:
 
 ```
 {
-    "webpage_url": "https://dzone.com/cloud-computing-tutorials-tools-news",
+    "webpage_url": "dzone.com/cloud-computing-tutorials-tools-news",
     "words": [
         "Cloud", "Docker", "Kubernetes", "OpenStack"
     ]
