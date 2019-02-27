@@ -2,7 +2,7 @@
 
 workflow:
   name:  webpage-word-count
-  version: "0.0.10"
+  version: "0.0.11"
 
   execution:
     constraint: same_executor  # other values: 'shared_fs', 'same_host'
@@ -49,7 +49,7 @@ workflow:
 tools:
   download_webpage:
     command: |
-      docker run hiromasaono/curl curl ${url} > abc.html \
+      docker run hiromasaono/curl curl -L ${url} > abc.html \
         && echo "{\"file\": \"$(pwd)/abc.html\", \"_wf_name\": \"${_wf_name}\", \"_wf_version\": \"${_wf_version}\", \"_wf_id\": \"${_wf_id}\", \"_job_name\": \"${_job_name}\", \"_job_id\": \"${_job_id}\", \"_jt_exec_version\": \"${_jt_exec_version}\"}" \
         > output.json
     input:
