@@ -1,0 +1,72 @@
+#Demo workflow
+
+workflow:
+  name:  concatenate-json-docs
+  version: "0.0.1"
+
+  execution:
+    constraint: same_executor  # other values: 'shared_fs', 'same_host'
+    memory: 2g
+    cpu: 1
+
+  input:
+    user_doc_url:
+      type: string
+      default: "https://jsonplaceholder.typicode.com/users/1"
+    todo_doc_url:
+      type: string
+      default: "https://jsonplaceholder.typicode.com/todos/1"
+
+  output:
+    merged_doc: merged_doc@merge_json
+
+
+  tasks:
+    download_user_doc:
+      tool: download
+      input:
+        url: user_doc_url
+      depends_on: null
+
+    download_todo_doc:
+      tool: download
+      input:
+        url: todo_doc_url
+      depends_on: null
+
+    merge_json:
+      tool: merge_json
+      input:
+        json_docs:
+        - file@download_user_doc
+        - file@download_todo_doc
+
+
+# A workflow is made up with one or more tools
+# Each tool can have its own docker imagine if desirable
+tools:
+  download:
+    command: |
+      docker run hiromasaono/curl curl -L ${url} > doc.json \
+        && echo "{\"file\": \"$(pwd)/doc.json\", \"_wf_name\": \"${_wf_name}\", \"_wf_version\": \"${_wf_version}\", \"_wf_id\": \"${_wf_id}\", \"_job_name\": \"${_job_name}\", \"_job_id\": \"${_job_id}\", \"_jt_exec_version\": \"${_jt_exec_version}\"}" \
+        > output.json
+    input:
+      url:
+        type: string
+    output:
+      file:
+        type: string
+        is_file: true
+
+  merge_json:
+    command: merge_json.py
+    input:
+      json_docs:
+        type: array
+        items:
+          type: string
+          is_file: true
+    output:
+      merged_doc:
+        type: string
+        is_file: true
